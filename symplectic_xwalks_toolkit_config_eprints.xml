@@ -1,94 +1,145 @@
-<epconfig xmlns:epconfig="http://www.symplectic.co.uk/ep3/config">
+  <epconfig xmlns:epconfig="http://www.symplectic.co.uk/ep3/config">
     <epconfig:fields>
-        <epconfig:field name="creators" type="compound" multiple="true">
-            <epconfig:subfield name="name" type="name" />
-            <epconfig:subfield name="id"   type="text" />
-        </epconfig:field>
-        <epconfig:field name="contributors" type="compound" multiple="true">
-            <epconfig:subfield name="type" type="namedset" />
-            <epconfig:subfield name="name" type="name" />
-            <epconfig:subfield name="id"   type="text" />
-        </epconfig:field>
-        <epconfig:field name="corp_creators"    type="text"     multiple="true" />
-        <epconfig:field name="title"            type="longtext" />
-        <epconfig:field name="ispublished"      type="set" />
-        <epconfig:field name="subjects"         type="subject"  multiple="true" />
-        <epconfig:field name="divisions"        type="subject"  multiple="true" />
-        <epconfig:field name="full_text_status" type="set" />
-        <epconfig:field name="monograph_type"   type="set" />
-        <epconfig:field name="pres_type"        type="set" />
-        <epconfig:field name="keywords"         type="longtext" />
-        <epconfig:field name="note"             type="longtext" />
-        <epconfig:field name="suggestions"      type="longtext" />
-        <epconfig:field name="abstract"         type="longtext" />
-        <epconfig:field name="date"             type="date" />
-        <epconfig:field name="date_type"        type="set" />
-        <epconfig:field name="series"           type="text" />
-        <epconfig:field name="publication"      type="text" />
-        <epconfig:field name="volume"           type="text" />
-        <epconfig:field name="number"           type="text" />
-        <epconfig:field name="publisher"        type="text" />
-        <epconfig:field name="place_of_pub"     type="text" />
-        <epconfig:field name="pagerange"        type="pagerange" />
-        <epconfig:field name="pages"            type="int" />
-        <epconfig:field name="event_title"      type="text" />
-        <epconfig:field name="event_location"   type="text" />
-        <epconfig:field name="event_dates"      type="text" />
-        <epconfig:field name="event_type"       type="set" />
-        <epconfig:field name="id_number"        type="text" />
-        <epconfig:field name="patent_applicant" type="text" />
-        <epconfig:field name="institution"      type="text" />
-        <epconfig:field name="department"       type="text" />
-        <epconfig:field name="thesis_type"      type="set" />
-        <epconfig:field name="refereed"         type="boolean" />
-        <epconfig:field name="isbn"             type="text" />
-        <epconfig:field name="issn"             type="text" />
-        <epconfig:field name="book_title"       type="text" />
-        <epconfig:field name="editors" type="compound" multiple="true">
-            <epconfig:subfield name="name" type="name" />
-            <epconfig:subfield name="id"   type="text" />
-        </epconfig:field>
-        <epconfig:field name="official_url"     type="url" />
-        <epconfig:field name="related_url"      type="compound">
-            <epconfig:subfield name="url" type="url" />
-            <epconfig:subfield name="type"   type="set" />
-        </epconfig:field>
-        <epconfig:field name="referencetext"    type="longtext" />
-        <epconfig:field name="funders"          type="text" multiple="true" />
-        <epconfig:field name="projects"         type="text" multiple="true" />
-        <epconfig:field name="output_media"     type="text" />
-        <epconfig:field name="exhibitors" type="compound" multiple="true">
-            <epconfig:subfield name="name" type="name" />
-            <epconfig:subfield name="id"   type="text" />
-        </epconfig:field>
-        <epconfig:field name="num_pieces"       type="int" />
-        <epconfig:field name="composition_type" type="text" />
-        <epconfig:field name="producers" type="compound" multiple="true">
-            <epconfig:subfield name="name" type="name" />
-            <epconfig:subfield name="id"   type="text" />
-        </epconfig:field>
-        <epconfig:field name="conductors" type="compound" multiple="true">
-            <epconfig:subfield name="name" type="name" />
-            <epconfig:subfield name="id"   type="text" />
-        </epconfig:field>
-        <epconfig:field name="lyricists" type="compound" multiple="true">
-            <epconfig:subfield name="name" type="name" />
-            <epconfig:subfield name="id"   type="text" />
-        </epconfig:field>
-        <epconfig:field name="accompaniment"     type="text" multiple="true" />
-        <epconfig:field name="data_type"         type="text" />
-        <epconfig:field name="pedagogic_type"    type="set" />
-        <epconfig:field name="completion_time"   type="text" />
-        <epconfig:field name="task_purpose"      type="text" />
-        <epconfig:field name="skill_areas"       type="text" multiple="true" />
-        <epconfig:field name="copyright_holders" type="text" multiple="true" />
-        <epconfig:field name="learning_level"    type="text" />
-        <epconfig:field name="gscholar" type="compound">
-            <epconfig:subfield name="impact"    type="int" />
-            <epconfig:subfield name="cluster"   type="id" />
-            <epconfig:subfield name="datestamp" type="time" />
-        </epconfig:field>
+      <epconfig:field name="eprintid" type="counter" />
+      <epconfig:field name="rev_number" type="int" />
+      <epconfig:field name="documents" multiple="true" type="subobject" />
+      <epconfig:field name="files" multiple="true" type="subobject" />
+      <epconfig:field name="eprint_status" type="set" />
+      <epconfig:field name="userid" type="itemref" />
+      <epconfig:field name="importid" type="itemref" />
+      <epconfig:field name="source" type="text" />
+      <epconfig:field name="dir" type="text" />
+      <epconfig:field name="datestamp" type="time" />
+      <epconfig:field name="lastmod" type="timestamp" />
+      <epconfig:field name="status_changed" type="time" />
+      <epconfig:field name="type" type="namedset" />
+      <epconfig:field name="succeeds" type="itemref" />
+      <epconfig:field name="commentary" type="itemref" />
+      <epconfig:field name="metadata_visibility" type="set" />
+      <epconfig:field name="contact_email" type="email" />
+      <epconfig:field name="fileinfo" type="longtext" />
+      <epconfig:field name="latitude" type="float" />
+      <epconfig:field name="longitude" type="float" />
+      <epconfig:field name="relation" multiple="true" type="compound">
+        <epconfig:subfield name="type" type="text" />
+        <epconfig:subfield name="uri" type="text" />
+      </epconfig:field>
+      <epconfig:field name="item_issues" multiple="true" type="compound">
+        <epconfig:subfield name="id" type="id" />
+        <epconfig:subfield name="type" type="id" />
+        <epconfig:subfield name="description" type="longtext" />
+        <epconfig:subfield name="timestamp" type="time" />
+        <epconfig:subfield name="status" type="set" />
+        <epconfig:subfield name="reported_by" type="itemref" />
+        <epconfig:subfield name="resolved_by" type="itemref" />
+        <epconfig:subfield name="comment" type="longtext" />
+      </epconfig:field>
+      <epconfig:field name="item_issues_count" type="int" />
+      <epconfig:field name="sword_depositor" type="itemref" />
+      <epconfig:field name="sword_slug" type="text" />
+      <epconfig:field name="edit_lock" type="compound">
+        <epconfig:subfield name="user" type="itemref" />
+        <epconfig:subfield name="since" type="int" />
+        <epconfig:subfield name="until" type="int" />
+      </epconfig:field>
+      <epconfig:field name="creators" multiple="true" type="compound">
+        <epconfig:subfield name="name" type="name" />
+        <epconfig:subfield name="id" type="text" />
+        <epconfig:subfield name="sgulid" type="text" />
+        <epconfig:subfield name="sgulid_hashed" type="authorid" />
+      </epconfig:field>
+      <epconfig:field name="contributors" multiple="true" type="compound">
+        <epconfig:subfield name="type" type="namedset" />
+        <epconfig:subfield name="name" type="name" />
+        <epconfig:subfield name="id" type="text" />
+      </epconfig:field>
+      <epconfig:field name="corp_creators" multiple="true" type="text" />
+      <epconfig:field name="title" type="longtext" />
+      <epconfig:field name="ispublished" type="set" />
+      <epconfig:field name="subjects" multiple="true" type="subject" />
+      <epconfig:field name="divisions" multiple="true" type="subject" />
+      <epconfig:field name="full_text_status" type="set" />
+      <epconfig:field name="monograph_type" type="set" />
+      <epconfig:field name="pres_type" type="set" />
+      <epconfig:field name="keywords" multiple="true" type="text" />
+      <epconfig:field name="note" type="longtext" />
+      <epconfig:field name="suggestions" type="longtext" />
+      <epconfig:field name="abstract" type="longtext" />
+      <epconfig:field name="date" type="date" />
+      <epconfig:field name="date_type" type="set" />
+      <epconfig:field name="series" type="text" />
+      <epconfig:field name="publication" type="text" />
+      <epconfig:field name="volume" type="text" />
+      <epconfig:field name="number" type="text" />
+      <epconfig:field name="publisher" type="text" />
+      <epconfig:field name="place_of_pub" type="text" />
+      <epconfig:field name="pagerange" type="pagerange" />
+      <epconfig:field name="pages" type="int" />
+      <epconfig:field name="event_title" type="text" />
+      <epconfig:field name="event_location" type="text" />
+      <epconfig:field name="event_dates" type="text" />
+      <epconfig:field name="event_type" type="set" />
+      <epconfig:field name="id_number" type="text" />
+      <epconfig:field name="patent_applicant" type="text" />
+      <epconfig:field name="institution" type="text" />
+      <epconfig:field name="department" type="text" />
+      <epconfig:field name="thesis_type" type="set" />
+      <epconfig:field name="refereed" type="boolean" />
+      <epconfig:field name="isbn" multiple="true" type="text" />
+      <epconfig:field name="issn" type="text" />
+      <epconfig:field name="book_title" type="text" />
+      <epconfig:field name="editors" multiple="true" type="compound">
+        <epconfig:subfield name="name" type="name" />
+        <epconfig:subfield name="id" type="text" />
+      </epconfig:field>
+      <epconfig:field name="official_url" type="url" />
+      <epconfig:field name="related_url" multiple="true" type="compound">
+        <epconfig:subfield name="url" type="url" />
+        <epconfig:subfield name="type" type="set" />
+      </epconfig:field>
+      <epconfig:field name="referencetext" type="longtext" />
+      <epconfig:field name="funders" multiple="true" type="text" />
+      <epconfig:field name="projects" multiple="true" type="text" />
+      <epconfig:field name="output_media" type="text" />
+      <epconfig:field name="exhibitors" multiple="true" type="compound">
+        <epconfig:subfield name="name" type="name" />
+        <epconfig:subfield name="id" type="text" />
+      </epconfig:field>
+      <epconfig:field name="num_pieces" type="int" />
+      <epconfig:field name="composition_type" type="text" />
+      <epconfig:field name="producers" multiple="true" type="compound">
+        <epconfig:subfield name="name" type="name" />
+        <epconfig:subfield name="id" type="text" />
+      </epconfig:field>
+      <epconfig:field name="conductors" multiple="true" type="compound">
+        <epconfig:subfield name="name" type="name" />
+        <epconfig:subfield name="id" type="text" />
+      </epconfig:field>
+      <epconfig:field name="lyricists" multiple="true" type="compound">
+        <epconfig:subfield name="name" type="name" />
+        <epconfig:subfield name="id" type="text" />
+      </epconfig:field>
+      <epconfig:field name="accompaniment" multiple="true" type="text" />
+      <epconfig:field name="data_type" type="text" />
+      <epconfig:field name="pedagogic_type" type="set" />
+      <epconfig:field name="completion_time" type="text" />
+      <epconfig:field name="task_purpose" type="longtext" />
+      <epconfig:field name="skill_areas" multiple="true" type="text" />
+      <epconfig:field name="copyright_holders" multiple="true" type="text" />
+      <epconfig:field name="learning_level" type="text" />
+      <epconfig:field name="gscholar" type="compound">
+        <epconfig:subfield name="impact" type="int" />
+        <epconfig:subfield name="cluster" type="id" />
+        <epconfig:subfield name="datestamp" type="time" />
+      </epconfig:field>
+      <epconfig:field name="symplectic_datasource" type="text" />
+      <epconfig:field name="pmid" type="text" />
+      <epconfig:field name="wosid" type="text" />
+      <epconfig:field name="symplectic_id" type="text" />
+      <epconfig:field name="pmcid" type="text" />
+      <epconfig:field name="pubmed_import_date" type="time" />
+      <epconfig:field name="pmcid_flag" type="boolean" />
+      <epconfig:field name="pmc_pdf_flag" type="boolean" />
+      <epconfig:field name="manual_harvest_lock" type="boolean" />
     </epconfig:fields>
-</epconfig>
-
-
+  </epconfig>
