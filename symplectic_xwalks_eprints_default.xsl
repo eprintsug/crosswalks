@@ -50,8 +50,8 @@
         <crosswalks:mapping eprints="note"   elements="notes" />
         <crosswalks:mapping eprints="book_title"   elements="parent-title" />
         <crosswalks:mapping eprints="event_location"   elements="location" />
-        <crosswalks:mapping eprints="event_dates"   elements="start-date" />
-        <crosswalks:mapping eprints="event_dates"   elements="finish-date" />
+<!--        <crosswalks:mapping eprints="event_dates"   elements="start-date,finish-date" /> -->
+<!--        <crosswalks:mapping eprints="event_dates"   elements="finish-date" /> -->
         <crosswalks:mapping eprints="contributors"   elements="associated-authors" />
         <crosswalks:mapping eprints="funcders"   elements="funding-acknowledgements" />
         <crosswalks:mapping eprints="references"   elements="references" />
@@ -167,6 +167,50 @@
      <xsl:variable name="element_type" select="@term"/> 
      <type><xsl:value-of select="document('')/*/crosswalks:type-map/entry[@elements=$element_type]"/></type>
   </xsl:template>
-
+  <!-- RMs horror show for concatenating dates -->
+  <xsl:template match="pubs:field" mode="feed">
+	<xsl:if test="current()[@name='start-date']">
+	<event_dates>	
+	  <xsl:if test="pubs:date/pubs:year">
+            <xsl:value-of select="normalize-space(pubs:date/pubs:year)"/>
+            <xsl:if test="pubs:date/pubs:month or pubs:date/pubs:day">
+                <xsl:text>-</xsl:text>
+            </xsl:if>
+          </xsl:if>
+          <xsl:if test="pubs:date/pubs:month">
+            <xsl:if test="string-length(normalize-space(pubs:date/pubs:month)) = 1"><xsl:text>0</xsl:text></xsl:if>
+            <xsl:value-of select="normalize-space(pubs:date/pubs:month)"/>
+            <xsl:if test="pubs:date/pubs:day">
+                <xsl:text>-</xsl:text>
+            </xsl:if>
+          </xsl:if>
+          <xsl:if test="pubs:date/pubs:day">
+            <xsl:if test="string-length(normalize-space(pubs:date/pubs:day)) = 1"><xsl:text>0</xsl:text></xsl:if>
+            <xsl:value-of select="normalize-space(pubs:date/pubs:day)"/>
+          </xsl:if>
+	  <xsl:if test="following-sibling::pubs:field[@name='end-date']">
+	    <xsl:text>-</xsl:text>
+	    <xsl:variable name="end" select="following-sibling::pubs:field[@name='end-date']/pubs:date"/>
+	  <xsl:if test="$end/pubs:year">
+            <xsl:value-of select="normalize-space($end/pubs:year)"/>
+            <xsl:if test="$end/pubs:month or $end/pubs:day">
+                <xsl:text>-</xsl:text>
+            </xsl:if>
+          </xsl:if>
+          <xsl:if test="$end/pubs:month">
+            <xsl:if test="string-length(normalize-space($end/pubs:month)) = 1"><xsl:text>0</xsl:text></xsl:if>
+            <xsl:value-of select="normalize-space($end/pubs:month)"/>
+            <xsl:if test="$end/pubs:day">
+                <xsl:text>-</xsl:text>
+            </xsl:if>
+          </xsl:if>
+          <xsl:if test="$end/pubs:day">
+            <xsl:if test="string-length(normalize-space($end/pubs:day)) = 1"><xsl:text>0</xsl:text></xsl:if>
+            <xsl:value-of select="normalize-space($end/pubs:day)"/>
+          </xsl:if>
+	 </xsl:if>
+	</event_dates>
+	</xsl:if>	
+  </xsl:template>
 
 </xsl:stylesheet>
