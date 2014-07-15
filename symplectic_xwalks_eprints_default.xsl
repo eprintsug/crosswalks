@@ -53,7 +53,7 @@
 <!--        <crosswalks:mapping eprints="event_dates"   elements="start-date,finish-date" /> -->
 <!--        <crosswalks:mapping eprints="event_dates"   elements="finish-date" /> -->
         <crosswalks:mapping eprints="contributors"   elements="associated-authors" />
-        <crosswalks:mapping eprints="funcders"   elements="funding-acknowledgements" />
+        <crosswalks:mapping eprints="funders"   elements="funding-acknowledgements" />
         <crosswalks:mapping eprints="references"   elements="references" />
         <crosswalks:mapping eprints="thesis_type"  elements="thesis-type" />
 
