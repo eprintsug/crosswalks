@@ -58,10 +58,10 @@
         <crosswalks:mapping eprints="thesis_type"  elements="thesis-type" />
 
       	<crosswalks:mapping first-mapped-only="y">
-            <crosswalks:mapping if-elements="filed-date">
+           <!-- <crosswalks:mapping if-elements="filed-date">
                 <crosswalks:mapping eprints="date"            elements="filed-date" />
                 <crosswalks:mapping eprints="date_type"       text="filed" />
-            </crosswalks:mapping>
+            </crosswalks:mapping> -->
             <crosswalks:mapping if-elements="publication-date">
                 <crosswalks:mapping eprints="date"            elements="publication-date" />
                 <crosswalks:mapping eprints="date_type"       text="published" />
