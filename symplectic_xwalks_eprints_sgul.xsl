@@ -12,7 +12,6 @@
 		one of these sources by looking at the crosswalks:datasource-precedences setting:
 	-->
 	<crosswalks:datasource-precedences>
-		<crosswalks:datasource-precedence>web-of-science</crosswalks:datasource-precedence>
 		<crosswalks:datasource-precedence>pubmed</crosswalks:datasource-precedence>
 		<crosswalks:datasource-precedence>web-of-science</crosswalks:datasource-precedence>
 		<crosswalks:datasource-precedence>wos-lite</crosswalks:datasource-precedence>
