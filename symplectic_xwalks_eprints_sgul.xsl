@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+	Developed for St George's, University of London by Tim Miles-Board timothy.miles-board@london.ac.uk
+	Requires Symplectic Repository Tools 1.7.1+
+-->
+
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:crosswalks="info:symplectic/crosswalks" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:pubs="http://www.symplectic.co.uk/publications/atom-api" version="1.0">
 
 	<xsl:import href="symplectic_xwalks_toolkit.xsl" />
@@ -8,7 +13,7 @@
 	<xsl:variable name="crosswalk-datasource-precedences" select="document('')//crosswalks:datasource-precedences" />
 
 	<!--
-		The feed from Elements may contain publication data from multiple sources (eg. pubmed, wos) - the toolkit will select
+		The feed from Symplectic Elements may contain publication data from multiple sources (eg. pubmed, wos) - the toolkit will select
 		one of these sources by looking at the crosswalks:datasource-precedences setting:
 	-->
 	<crosswalks:datasource-precedences>
@@ -71,7 +76,7 @@
 	<!--
 		Custom mappings for specific fields can be defined.
 
-		To override the mapping for the pubs:foo field first create a template that matches pubs:foo in "mapping" mode:
+		For example, to override the mapping for the pubs:foo field first create a template that matches pubs:foo in "mapping" mode:
 
 		<xsl:template match="pubs:foo" mode="mapping">
 			<xsl:param name="name" />
@@ -168,7 +173,7 @@
 	</xsl:template>
 
 	<!--
-		The toolkit uses dictionaries to map Elements values to EPrints sets/namedsets
+		The crosswalks toolkit uses dictionaries to map Symplectic Elements values to EPrints sets/namedsets
 	-->
 	<crosswalks:dictionaries>
 
@@ -231,6 +236,7 @@
 		</xsl:element>
 	</xsl:template>
 
+	<!-- Note that SGUL's keywords field is multiple which is not the EPrints default -->
 	<xsl:template match="atom:feed/pubs:all-labels/pubs:keywords" mode="feed">
 		<xsl:element name="keywords">
 			<xsl:for-each select="pubs:keyword">
