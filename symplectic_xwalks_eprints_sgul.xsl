@@ -38,6 +38,7 @@
 		<crosswalks:mapping eprints="official_url"	elements="publisher-url" />
 		<crosswalks:mapping eprints="pagerange"		elements="pagination" />
 		<crosswalks:mapping eprints="pages"		elements="pagination" />
+		<crosswalks:mapping eprints="article_number"	elements="pagination" />
 		<crosswalks:mapping eprints="publication"	elements="journal" />
 		<crosswalks:mapping eprints="publisher"		elements="publisher" />
 		<crosswalks:mapping eprints="funders"		elements="funding-acknowledgements" />
@@ -106,18 +107,16 @@
 			<xsl:when test="$repo_field='pagerange'">
 				<xsl:apply-templates select="." mode="pagerange" />
 			</xsl:when>
+			<xsl:when test="$repo_field='article_number'">
+				<xsl:apply-templates select="." mode="artnum" />
+			</xsl:when>
 		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="pubs:pagination" mode="pagerange">
 		<xsl:choose>
-			<xsl:when test="pubs:begin-page and not(pubs:end-page) and starts-with(pubs:begin-page, 'e')">
-				<!-- eg. e1001258 -->
-				<xsl:element name="article_number">
-					<xsl:value-of select="normalize-space(pubs:begin-page)"/>
-				</xsl:element>
-			</xsl:when>
-			<xsl:otherwise>
+			<xsl:when test="pubs:begin-page and not(pubs:end-page) and starts-with(pubs:begin-page, 'e')"/>
+			<xsl:when test="pubs:begin-page or pubs:end-page">
 				<xsl:if test="pubs:begin-page">
 					<xsl:value-of select="normalize-space(pubs:begin-page)"/>
 				</xsl:if>
@@ -125,8 +124,15 @@
 				<xsl:if test="pubs:end-page">
 					<xsl:value-of select="normalize-space(pubs:end-page)"/>
 				</xsl:if>
-			</xsl:otherwise>
+			</xsl:when>
 		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="pubs:pagination" mode="artnum">
+		<xsl:if test="pubs:begin-page and not(pubs:end-page) and starts-with(pubs:begin-page, 'e')">
+			<!-- eg. e1001258 -->
+			<xsl:value-of select="normalize-space(pubs:begin-page)"/>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="pubs:funding-acknowledgements" mode="mapping">
