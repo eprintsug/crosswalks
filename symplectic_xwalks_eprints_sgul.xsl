@@ -32,35 +32,36 @@
 	-->
 	<crosswalks:mappings for="eprints">
 		<crosswalks:mapping eprints="abstract"		elements="abstract" />
+		<crosswalks:mapping eprints="article_number"	elements="pagination" />
+		<crosswalks:mapping eprints="book_title"	elements="parent-title" />
+		<crosswalks:mapping eprints="contributors"	elements="associated-authors" />
 		<crosswalks:mapping eprints="creators"		elements="authors" />
-		<crosswalks:mapping eprints="id_number"		elements="doi,patent-number" />
 		<crosswalks:mapping eprints="editors"		elements="editors" />
-		<crosswalks:mapping eprints="series"		elements="series" /> 
+		<crosswalks:mapping eprints="event_dates"	list-elements="start-date,finish-date" list-separator=" - " date-format="dd.mon.yyyy"/>
+		<crosswalks:mapping eprints="event_location"	elements="location" />
+		<crosswalks:mapping eprints="event_title"	elements="name-of-conference" />
+		<crosswalks:mapping eprints="funders"		elements="funding-acknowledgements" />
+		<crosswalks:mapping eprints="id_number"		elements="doi,patent-number" />
 		<crosswalks:mapping eprints="isbn"		elements="isbn-10,isbn-13" />
 		<crosswalks:mapping eprints="ispublished"	elements="publication-status" />
 		<crosswalks:mapping eprints="issn"		elements="issn,eissn" />
+		<crosswalks:mapping eprints="language"		elements="language" />
+		<crosswalks:mapping eprints="note"		elements="notes" />
 		<crosswalks:mapping eprints="number"		elements="issue" />
 		<crosswalks:mapping eprints="official_url"	elements="publisher-url" />
+		<crosswalks:mapping eprints="output_media"	elements="medium" />
 		<crosswalks:mapping eprints="pagerange"		elements="pagination" />
 		<crosswalks:mapping eprints="pages"		elements="pagination" />
-		<crosswalks:mapping eprints="article_number"	elements="pagination" />
+		<crosswalks:mapping eprints="place_of_pub"	elements="place-of-publication" />
+		<crosswalks:mapping eprints="projects"		elements="funding-acknowledgements" />
 		<crosswalks:mapping eprints="publication"	elements="journal" />
 		<crosswalks:mapping eprints="publisher"		elements="publisher" />
-		<crosswalks:mapping eprints="funders"		elements="funding-acknowledgements" />
-		<crosswalks:mapping eprints="projects"		elements="funding-acknowledgements" />
+		<crosswalks:mapping eprints="references"	elements="references" />
 		<crosswalks:mapping eprints="related_url"	elements="author-url,arxiv-pdf-url"/>
-		<crosswalks:mapping eprints="event_title"	elements="name-of-conference" />
+		<crosswalks:mapping eprints="series"		elements="series" /> 
+		<crosswalks:mapping eprints="thesis_type"	elements="thesis-type" />
 		<crosswalks:mapping eprints="title"		elements="title" />
 		<crosswalks:mapping eprints="volume"		elements="volume" />
-		<crosswalks:mapping eprints="place_of_pub"	elements="place-of-publication" />
-		<crosswalks:mapping eprints="output_media"	elements="medium" />
-		<crosswalks:mapping eprints="note"		elements="notes" />
-		<crosswalks:mapping eprints="book_title"	elements="parent-title" />
-		<crosswalks:mapping eprints="event_location"	elements="location" />
-		<crosswalks:mapping eprints="contributors"	elements="associated-authors" />
-		<crosswalks:mapping eprints="references"	elements="references" />
-		<crosswalks:mapping eprints="thesis_type"	elements="thesis-type" />
-		<crosswalks:mapping eprints="event_dates"	list-elements="start-date,finish-date" list-separator=" - " date-format="dd.mon.yyyy"/>
 		<crosswalks:mapping first-mapped-only="y">
 			<crosswalks:mapping if-elements="publication-date">
 				<crosswalks:mapping eprints="date"            elements="publication-date" />
@@ -157,16 +158,12 @@
 		<xsl:choose>
 			<xsl:when test="$repo_field='projects'">
 				<xsl:for-each select="pubs:grants/pubs:grant">
-					<xsl:element name="item">
-						<xsl:value-of select="pubs:grant-id"/>
-					</xsl:element>
+					<xsl:value-of select="pubs:grant-id"/>
 				</xsl:for-each>
 			</xsl:when>
 			<xsl:when test="$repo_field='funders'">
 				<xsl:for-each select="pubs:grants/pubs:grant">
-					<xsl:element name="item">
-						<xsl:value-of select="pubs:organisation"/>
-					</xsl:element>
+					<xsl:value-of select="pubs:organisation"/>
 				</xsl:for-each>
 			</xsl:when>
 		</xsl:choose>
