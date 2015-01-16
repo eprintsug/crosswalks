@@ -3,7 +3,6 @@
                 xmlns:crosswalks="info:symplectic/crosswalks"
                 xmlns:pubs="http://www.symplectic.co.uk/publications/atom-api"
                 xmlns:dim="http://www.dspace.org/xmlns/dspace/dim"
-		xmlns:atom="http://www.w3.org/2005/Atom" 
                 exclude-result-prefixes="pubs crosswalks dim"
                 version="1.0">
 
@@ -140,9 +139,6 @@
             <xsl:with-param name="dictionary-name" select="$name" />
         </xsl:apply-templates>
     </xsl:template>
-	
-	<xsl:variable name="pubs_users" select="atom:feed/pubs:users/pubs:user"/>
-
 
     <xsl:template match="pubs:people/pubs:person">
         <xsl:param name="name" />
@@ -154,15 +150,7 @@
                     <xsl:if test="normalize-space(pubs:last-name)!=''"><family><xsl:value-of select="normalize-space(pubs:last-name)"/></family></xsl:if>
                     <xsl:if test="normalize-space(pubs:initials)!=''"><given><xsl:value-of select="normalize-space(pubs:initials)"/></given></xsl:if>
                 </name>
-		<xsl:variable name="family" select="pubs:last-name"/>
-		<xsl:variable name="given" select="pubs:initials"/>
-		<xsl:for-each select="$pubs_users">
-			<xsl:if test="(pubs:last-name = $family) and substring(pubs:first-name,1,1) = $given">
-				<sgulid><xsl:value-of select="pubs:proprietary-id" /></sgulid>
-				<id><xsl:value-of select="pubs:email-address" /></id>
-			</xsl:if>
-		</xsl:for-each>
-          </xsl:when>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="normalize-space(pubs:last-name)"/>
                 <xsl:if test="(normalize-space(pubs:last-name)!='') and (normalize-space(pubs:initials)!='')">
