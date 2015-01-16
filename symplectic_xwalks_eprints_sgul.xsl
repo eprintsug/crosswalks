@@ -304,7 +304,7 @@
     </xsl:template>
 
     <!-- override template from symplectic_xwalks_toolkit_mapping.xsl -->
-    <xsl:template name="_render_mapping_occurrencesasd">
+    <xsl:template name="_render_mapping_occurrences">
         <xsl:param name="elements" />
         <xsl:param name="repo_field" />
         <xsl:param name="date-format" />
