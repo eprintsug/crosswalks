@@ -141,7 +141,7 @@
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="pubs:funding-acknowledgements" mode="mapping">
+	<xsl:template match="pubs:grant" mode="mapping">
 		<xsl:param name="name" />
 		<xsl:param name="repo_field" />
 
@@ -151,20 +151,16 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<xsl:template match="pubs:funding-acknowledgements">
+	<xsl:template match="pubs:grant">
 		<xsl:param name="name" />
 		<xsl:param name="repo_field" />
 
 		<xsl:choose>
 			<xsl:when test="$repo_field='projects'">
-				<xsl:for-each select="pubs:grants/pubs:grant">
 					<xsl:value-of select="pubs:grant-id"/>
-				</xsl:for-each>
 			</xsl:when>
 			<xsl:when test="$repo_field='funders'">
-				<xsl:for-each select="pubs:grants/pubs:grant">
 					<xsl:value-of select="pubs:organisation"/>
-				</xsl:for-each>
 			</xsl:when>
 		</xsl:choose>
 	</xsl:template>
@@ -272,5 +268,91 @@
 		<entry elements="http://www.symplectic.co.uk/publications/atom-terms/1.0/software">software</entry>
 		<entry elements="http://www.symplectic.co.uk/publications/atom-terms/1.0/thesis-or-dissertation">thesis</entry>
 	</crosswalks:type-map>
+
+    <!-- override template from symplectic_xwalks_toolkit_fieldtypes.xsl -->
+	<xsl:variable name="pubs_users" select="atom:feed/pubs:users/pubs:user"/>
+
+    <xsl:template match="pubs:people/pubs:person">
+        <xsl:param name="name" />
+        <xsl:param name="repo_field" />
+
+        <xsl:choose>
+            <xsl:when test="$repository-type='eprints'">
+                <name>
+                    <xsl:if test="normalize-space(pubs:last-name)!=''"><family><xsl:value-of select="normalize-space(pubs:last-name)"/></family></xsl:if>
+                    <xsl:if test="normalize-space(pubs:initials)!=''"><given><xsl:value-of select="normalize-space(pubs:initials)"/></given></xsl:if>
+                </name>
+                <!-- BEGIN CHANGE match author to institutional person -->
+                <xsl:variable name="family" select="pubs:last-name"/>
+		        <xsl:variable name="given" select="pubs:initials"/>
+		        <xsl:for-each select="$pubs_users">
+			        <xsl:if test="(pubs:last-name = $family) and substring(pubs:first-name,1,1) = substring($given,1,1)">
+				        <sgulid><xsl:value-of select="pubs:proprietary-id" /></sgulid>
+				        <id><xsl:value-of select="pubs:email-address" /></id>
+			        </xsl:if>
+                </xsl:for-each>
+                <!-- END CHANGE -->
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="normalize-space(pubs:last-name)"/>
+                <xsl:if test="(normalize-space(pubs:last-name)!='') and (normalize-space(pubs:initials)!='')">
+                    <xsl:text>, </xsl:text>
+                </xsl:if>
+                <xsl:value-of select="normalize-space(pubs:initials)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- override template from symplectic_xwalks_toolkit_mapping.xsl -->
+    <xsl:template name="_render_mapping_occurrencesasd">
+        <xsl:param name="elements" />
+        <xsl:param name="repo_field" />
+        <xsl:param name="date-format" />
+        <xsl:param name="max" />
+
+        <xsl:param name="_elements_to_iterate" />
+
+        <xsl:choose>
+            <xsl:when test="contains($elements, ',')">
+                <xsl:call-template name="_render_mapping_occurrences">
+                    <xsl:with-param name="elements"    select="normalize-space(substring-before($elements, ','))" />
+                    <xsl:with-param name="repo_field"  select="$repo_field" />
+                    <xsl:with-param name="date-format" select="$date-format" />
+                    <xsl:with-param name="max"         select="$max" />
+                    <xsl:with-param name="_elements_to_iterate" select="normalize-space(substring-after($elements, ','))" />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="fields" select="pubs:field[@name=normalize-space($elements)]" />
+                <!-- BEGIN CHANGE split pubs:funding-acknowledgements into separate grants -->
+                <xsl:variable name="field_values" select="$fields/pubs:funding-acknowledgements/pubs:grants/*|$fields/pubs:people/*|$fields/pubs:keywords/*|$fields/pubs:items/*|$fields/*[local-name()!='items' and local-name()!='keywords' and local-name()!='people' and local-name()!='funding-acknowledgements']" />
+                <!-- END CHANGE -->
+
+                <xsl:for-each select="$field_values">
+                    <xsl:if test="$max='' or position() &lt;= $max">
+                        <xsl:call-template name="_render_field_occurrence">
+                            <xsl:with-param name="field"  select="$repo_field" />
+                            <xsl:with-param name="value">
+                                <xsl:apply-templates select="." mode="mapping">
+                                    <xsl:with-param name="name"><xsl:value-of select="ancestor::pubs:field/@name" /></xsl:with-param>
+                                    <xsl:with-param name="repo_field" select="$repo_field" />
+                                    <xsl:with-param name="date-format" select="$date-format" />
+                                </xsl:apply-templates>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:if>
+                </xsl:for-each>
+                <xsl:if test="$_elements_to_iterate and ($max='' or count($field_values) &lt; $max)">
+                    <xsl:call-template name="_render_mapping_occurrences">
+                        <xsl:with-param name="elements"    select="$_elements_to_iterate" />
+                        <xsl:with-param name="repo_field"  select="$repo_field" />
+                        <xsl:with-param name="date-format" select="$date-format" />
+                        <xsl:with-param name="max"><xsl:if test="$max &gt; 0"><xsl:value-of select="$max - count($field_values)"/></xsl:if></xsl:with-param>
+                        <xsl:with-param name="_elements_to_iterate" />
+                    </xsl:call-template>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
 </xsl:stylesheet>
