@@ -141,5 +141,16 @@
       <epconfig:field name="pmcid_flag" type="boolean" />
       <epconfig:field name="pmc_pdf_flag" type="boolean" />
       <epconfig:field name="manual_harvest_lock" type="boolean" />
+      <epconfig:field name="article_number" type="text" />
+      <epconfig:field name="language" type="text" />
+      <epconfig:field name="rioxx2_project_input" multiple="true" type="compound">
+        <epconfig:subfield name="project" type="text" />
+        <epconfig:subfield name="funder_name" type="text" />
+        <epconfig:subfield name="funder_id" type="url" />
+      </epconfig:field>
+      <epconfig:field name="users" multiple="true" type="compound">
+        <epconfig:subfield name="name" type="name" />
+        <epconfig:subfield name="id" type="id" />
+      </epconfig:field>
     </epconfig:fields>
   </epconfig>

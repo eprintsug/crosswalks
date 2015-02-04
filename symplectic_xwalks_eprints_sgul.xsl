@@ -40,7 +40,6 @@
 		<crosswalks:mapping eprints="event_dates"	list-elements="start-date,finish-date" list-separator=" - " date-format="dd.mon.yyyy"/>
 		<crosswalks:mapping eprints="event_location"	elements="location" />
 		<crosswalks:mapping eprints="event_title"	elements="name-of-conference" />
-		<crosswalks:mapping eprints="funders"		elements="funding-acknowledgements" />
 		<crosswalks:mapping eprints="id_number"		elements="doi,patent-number" />
 		<crosswalks:mapping eprints="isbn"		elements="isbn-10,isbn-13" />
 		<crosswalks:mapping eprints="ispublished"	elements="publication-status" />
@@ -53,7 +52,7 @@
 		<crosswalks:mapping eprints="pagerange"		elements="pagination" />
 		<crosswalks:mapping eprints="pages"		elements="pagination" />
 		<crosswalks:mapping eprints="place_of_pub"	elements="place-of-publication" />
-		<crosswalks:mapping eprints="projects"		elements="funding-acknowledgements" />
+		<crosswalks:mapping eprints="rioxx2_project_input"		elements="funding-acknowledgements" />
 		<crosswalks:mapping eprints="publication"	elements="journal" />
 		<crosswalks:mapping eprints="publisher"		elements="publisher" />
 		<crosswalks:mapping eprints="references"	elements="references" />
@@ -145,24 +144,16 @@
 		<xsl:param name="name" />
 		<xsl:param name="repo_field" />
 
-		<xsl:apply-templates select=".">
-			<xsl:with-param name="name" select="$name" />
-			<xsl:with-param name="repo_field" select="$repo_field" />
-		</xsl:apply-templates>
+		<xsl:apply-templates select="."/>
 	</xsl:template>
 
 	<xsl:template match="pubs:grant">
-		<xsl:param name="name" />
-		<xsl:param name="repo_field" />
-
-		<xsl:choose>
-			<xsl:when test="$repo_field='projects'">
-					<xsl:value-of select="pubs:grant-id"/>
-			</xsl:when>
-			<xsl:when test="$repo_field='funders'">
-					<xsl:value-of select="pubs:organisation"/>
-			</xsl:when>
-		</xsl:choose>
+        <xsl:element name="project">
+            <xsl:value-of select="pubs:grant-id"/>
+        </xsl:element>
+        <xsl:element name="funder_name">
+            <xsl:value-of select="pubs:organisation"/>
+        </xsl:element>
 	</xsl:template>
 
 	<!--
@@ -246,6 +237,20 @@
 			<xsl:value-of select="document('')//crosswalks:type-map/entry[@elements=$element_type]"/>
 		</xsl:element>
 	</xsl:template>
+
+    <xsl:template match="atom:feed/pubs:users" mode="feed">
+        <xsl:element name="users">
+            <xsl:for-each select="pubs:user">
+                <xsl:element name="item">
+                    <xsl:element name="name">
+                        <xsl:element name="family"><xsl:value-of select="pubs:last-name"/></xsl:element>
+                        <xsl:element name="given"><xsl:value-of select="pubs:first-name"/></xsl:element>
+                    </xsl:element>
+                    <xsl:element name="id"><xsl:value-of select="pubs:proprietary-id"/></xsl:element>
+                </xsl:element>
+            </xsl:for-each>
+        </xsl:element>
+    </xsl:template>
 
 	<!--
 		Map Elements item type to EPrints item type
