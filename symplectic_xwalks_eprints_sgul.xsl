@@ -240,15 +240,23 @@
 
     <xsl:template match="atom:feed/pubs:users" mode="feed">
         <xsl:element name="users">
-            <xsl:for-each select="pubs:user">
-                <xsl:element name="item">
-                    <xsl:element name="name">
-                        <xsl:element name="family"><xsl:value-of select="pubs:last-name"/></xsl:element>
-                        <xsl:element name="given"><xsl:value-of select="pubs:first-name"/></xsl:element>
-                    </xsl:element>
-                    <xsl:element name="id"><xsl:value-of select="pubs:proprietary-id"/></xsl:element>
-                </xsl:element>
-            </xsl:for-each>
+            <xsl:apply-templates select="pubs:user"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="atom:feed/pubs:actors" mode="feed">
+        <xsl:element name="actors">
+            <xsl:apply-templates select="pubs:user"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="pubs:user">
+        <xsl:element name="item">
+            <xsl:element name="name">
+                <xsl:element name="family"><xsl:value-of select="pubs:last-name"/></xsl:element>
+                <xsl:element name="given"><xsl:value-of select="pubs:first-name"/></xsl:element>
+            </xsl:element>
+            <xsl:element name="id"><xsl:value-of select="pubs:proprietary-id"/></xsl:element>
         </xsl:element>
     </xsl:template>
 
