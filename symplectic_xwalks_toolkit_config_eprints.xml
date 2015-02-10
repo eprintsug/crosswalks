@@ -155,7 +155,7 @@
       <epconfig:field name="actors" multiple="true" type="compound">
         <epconfig:subfield name="name" type="name" />
         <epconfig:subfield name="email" type="email" />
-        <epconfig:subfield name="role" type="text" />
+        <epconfig:subfield name="role" type="set" />
       </epconfig:field>
     </epconfig:fields>
   </epconfig>
