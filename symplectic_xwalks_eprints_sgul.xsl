@@ -256,7 +256,8 @@
                 <xsl:element name="family"><xsl:value-of select="pubs:last-name"/></xsl:element>
                 <xsl:element name="given"><xsl:value-of select="pubs:first-name"/></xsl:element>
             </xsl:element>
-            <xsl:element name="id"><xsl:value-of select="pubs:proprietary-id"/></xsl:element>
+            <xsl:element name="email"><xsl:value-of select="pubs:email-address"/></xsl:element>
+            <xsl:element name="role"><xsl:value-of select="@type"/></xsl:element>
         </xsl:element>
     </xsl:template>
 
