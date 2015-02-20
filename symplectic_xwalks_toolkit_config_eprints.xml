@@ -45,8 +45,6 @@
       <epconfig:field name="creators" multiple="true" type="compound">
         <epconfig:subfield name="name" type="name" />
         <epconfig:subfield name="id" type="text" />
-        <epconfig:subfield name="sgulid" type="text" />
-        <epconfig:subfield name="sgulid_hashed" type="authorid" />
       </epconfig:field>
       <epconfig:field name="contributors" multiple="true" type="compound">
         <epconfig:subfield name="type" type="namedset" />

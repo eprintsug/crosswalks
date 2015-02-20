@@ -258,6 +258,7 @@
             </xsl:element>
             <xsl:element name="email"><xsl:value-of select="pubs:email-address"/></xsl:element>
             <xsl:element name="role"><xsl:value-of select="@type"/></xsl:element>
+            <xsl:element name="id"><xsl:value-of select="pubs:proprietary-id"/></xsl:element>
         </xsl:element>
     </xsl:template>
 
