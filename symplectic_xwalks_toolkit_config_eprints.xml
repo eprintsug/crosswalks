@@ -155,5 +155,6 @@
         <epconfig:subfield name="email" type="email" />
         <epconfig:subfield name="role" type="set" />
       </epconfig:field>
+      <epconfig:field name="staff_note" type="longtext" />
     </epconfig:fields>
   </epconfig>

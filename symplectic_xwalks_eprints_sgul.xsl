@@ -45,7 +45,7 @@
 		<crosswalks:mapping eprints="ispublished"	elements="publication-status" />
 		<crosswalks:mapping eprints="issn"		elements="issn,eissn" />
 		<crosswalks:mapping eprints="language"		elements="language" />
-		<crosswalks:mapping eprints="note"		elements="notes" />
+		<crosswalks:mapping eprints="staff_note"	elements="notes" />
 		<crosswalks:mapping eprints="number"		elements="issue" />
 		<crosswalks:mapping eprints="official_url"	elements="publisher-url" />
 		<crosswalks:mapping eprints="output_media"	elements="medium" />
