@@ -141,11 +141,6 @@
       <epconfig:field name="manual_harvest_lock" type="boolean" />
       <epconfig:field name="article_number" type="text" />
       <epconfig:field name="language" type="text" />
-      <epconfig:field name="rioxx2_project_input" multiple="true" type="compound">
-        <epconfig:subfield name="project" type="text" />
-        <epconfig:subfield name="funder_name" type="text" />
-        <epconfig:subfield name="funder_id" type="url" />
-      </epconfig:field>
       <epconfig:field name="users" multiple="true" type="compound">
         <epconfig:subfield name="name" type="name" />
         <epconfig:subfield name="id" type="id" />
@@ -156,5 +151,55 @@
         <epconfig:subfield name="role" type="set" />
       </epconfig:field>
       <epconfig:field name="staff_note" type="longtext" />
+      <epconfig:field name="dates" multiple="true" type="compound">
+        <epconfig:subfield name="date" type="date" />
+        <epconfig:subfield name="date_type" type="set" />
+      </epconfig:field>
+      <epconfig:field name="rioxx2_free_to_read" type="RIOXX2" />
+      <epconfig:field name="rioxx2_license_ref" type="RIOXX2" />
+      <epconfig:field name="rioxx2_coverage" type="RIOXX2" />
+      <epconfig:field name="rioxx2_description" type="RIOXX2" />
+      <epconfig:field name="rioxx2_format" type="RIOXX2" />
+      <epconfig:field name="rioxx2_identifier" type="RIOXX2" />
+      <epconfig:field name="rioxx2_language" type="RIOXX2" />
+      <epconfig:field name="rioxx2_publisher" type="RIOXX2" />
+      <epconfig:field name="rioxx2_relation" type="RIOXX2" />
+      <epconfig:field name="rioxx2_source" type="RIOXX2" />
+      <epconfig:field name="rioxx2_subject" type="RIOXX2" />
+      <epconfig:field name="rioxx2_title" type="RIOXX2" />
+      <epconfig:field name="rioxx2_dateAccepted" type="RIOXX2" />
+      <epconfig:field name="rioxx2_apc" type="RIOXX2" />
+      <epconfig:field name="rioxx2_author" type="RIOXX2" />
+      <epconfig:field name="rioxx2_contributor" type="RIOXX2" />
+      <epconfig:field name="rioxx2_project" type="RIOXX2" />
+      <epconfig:field name="rioxx2_publication_date" type="RIOXX2" />
+      <epconfig:field name="rioxx2_type" type="RIOXX2" />
+      <epconfig:field name="rioxx2_version" type="RIOXX2" />
+      <epconfig:field name="rioxx2_version_of_record" type="RIOXX2" />
+      <epconfig:field name="rioxx2_coverage_input" multiple="true" type="text" />
+      <epconfig:field name="rioxx2_language_input" multiple="true" type="namedset" />
+      <epconfig:field name="rioxx2_dateAccepted_input" type="date" />
+      <epconfig:field name="rioxx2_free_to_read_input" type="compound">
+        <epconfig:subfield name="free_to_read" type="set" />
+        <epconfig:subfield name="start_date" type="date" />
+        <epconfig:subfield name="end_date" type="date" />
+      </epconfig:field>
+      <epconfig:field name="rioxx2_license_ref_input" type="compound">
+        <epconfig:subfield name="license_ref" type="url" />
+        <epconfig:subfield name="start_date" type="date" />
+      </epconfig:field>
+      <epconfig:field name="rioxx2_apc_input" type="set" />
+      <epconfig:field name="rioxx2_author_input" multiple="true" type="compound">
+        <epconfig:subfield name="author" type="text" />
+        <epconfig:subfield name="id" type="url" />
+      </epconfig:field>
+      <epconfig:field name="rioxx2_project_input" multiple="true" type="compound">
+        <epconfig:subfield name="project" type="text" />
+        <epconfig:subfield name="funder_name" type="text" />
+        <epconfig:subfield name="funder_id" type="url" />
+      </epconfig:field>
+      <epconfig:field name="rioxx2_publication_date_input" type="text" />
+      <epconfig:field name="rioxx2_type_input" multiple="true" type="set" />
+      <epconfig:field name="rioxx2_version_input" type="set" />
     </epconfig:fields>
   </epconfig>
