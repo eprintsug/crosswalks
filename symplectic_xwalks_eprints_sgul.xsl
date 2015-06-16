@@ -61,16 +61,7 @@
 		<crosswalks:mapping eprints="thesis_type"	elements="thesis-type" />
 		<crosswalks:mapping eprints="title"		elements="title" />
 		<crosswalks:mapping eprints="volume"		elements="volume" />
-		<crosswalks:mapping first-mapped-only="y">
-			<crosswalks:mapping if-elements="publication-date">
-				<crosswalks:mapping eprints="date"            elements="publication-date" />
-				<crosswalks:mapping eprints="date_type"       text="published" />
-			</crosswalks:mapping>
-			<crosswalks:mapping if-elements="filed-date">
-				<crosswalks:mapping eprints="date"            elements="filed-date" />
-				<crosswalks:mapping eprints="date_type"       text="filed" />
-			</crosswalks:mapping>
-		</crosswalks:mapping>
+		<crosswalks:mapping eprints="dates"		elements="publication-date,acceptance-date,filed-date" date-format="yyyy-mm-dd"/>
 	</crosswalks:mappings>
 
 	<!--
@@ -154,6 +145,23 @@
         <xsl:element name="funder_name">
             <xsl:value-of select="pubs:organisation"/>
         </xsl:element>
+	</xsl:template>
+
+	<xsl:template match="pubs:date" mode="mapping">
+		<xsl:param name="name" />
+		<xsl:param name="repo_field" />
+		<xsl:param name="date-format" />
+
+		<xsl:element name="date">
+			<xsl:apply-templates select="."/>
+		</xsl:element>
+		<xsl:element name="date_type">
+			<xsl:choose>
+				<xsl:when test="$name='publication-date'">published</xsl:when>
+				<xsl:when test="$name='acceptance-date'">accepted</xsl:when>
+				<xsl:when test="$name='filed-date'">filed</xsl:when>
+			</xsl:choose>
+		</xsl:element>
 	</xsl:template>
 
 	<!--
