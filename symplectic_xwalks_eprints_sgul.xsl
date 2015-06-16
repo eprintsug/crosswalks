@@ -62,6 +62,7 @@
 		<crosswalks:mapping eprints="title"		elements="title" />
 		<crosswalks:mapping eprints="volume"		elements="volume" />
 		<crosswalks:mapping eprints="dates"		elements="publication-date,acceptance-date,filed-date" date-format="yyyy-mm-dd"/>
+		<crosswalks:mapping eprints="pub_license"	elements="publisher-licence"/>
 	</crosswalks:mappings>
 
 	<!--
@@ -168,6 +169,17 @@
 		The crosswalks toolkit uses dictionaries to map Symplectic Elements values to EPrints sets/namedsets
 	-->
 	<crosswalks:dictionaries>
+
+		<crosswalks:dictionary elements="publisher-licence">
+			<crosswalks:entry elements="CC BY"			eprints="cc_by" />
+			<crosswalks:entry elements="CC BY-ND"			eprints="cc_by_nd" />
+			<crosswalks:entry elements="CC BY-NC"			eprints="cc_by_nc" />
+			<crosswalks:entry elements="CC BY-NC-ND"		eprints="cc_by_nc_nd" />
+			<crosswalks:entry elements="CC BY-NC-SA"		eprints="cc_by_nc_sa" />
+			<crosswalks:entry elements="CC BY-SA"			eprints="cc_by_sa" />
+			<crosswalks:entry elements="Publisher's own licence"	eprints="publisher" />
+			<crosswalks:entry elements="Unknown"			eprints="unknown" />
+		</crosswalks:dictionary>
 
 		<crosswalks:dictionary elements="c-publication-status-local">
 			<crosswalks:entry elements="Published"		eprints="pub" />
