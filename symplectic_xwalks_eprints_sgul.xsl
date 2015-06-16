@@ -42,7 +42,7 @@
 		<crosswalks:mapping eprints="event_title"	elements="name-of-conference" />
 		<crosswalks:mapping eprints="id_number"		elements="doi,patent-number" />
 		<crosswalks:mapping eprints="isbn"		elements="isbn-10,isbn-13" />
-		<crosswalks:mapping eprints="ispublished"	elements="publication-status" />
+		<crosswalks:mapping eprints="ispublished"	elements="c-publication-status-local,publication-status" />
 		<crosswalks:mapping eprints="issn"		elements="issn,eissn" />
 		<crosswalks:mapping eprints="language"		elements="language" />
 		<crosswalks:mapping eprints="staff_note"	elements="notes" />
@@ -168,6 +168,13 @@
 		The crosswalks toolkit uses dictionaries to map Symplectic Elements values to EPrints sets/namedsets
 	-->
 	<crosswalks:dictionaries>
+
+		<crosswalks:dictionary elements="c-publication-status-local">
+			<crosswalks:entry elements="Published"		eprints="pub" />
+			<crosswalks:entry elements="Submitted"		eprints="submitted" />
+			<crosswalks:entry elements="Accepted"		eprints="inpress" />
+			<crosswalks:entry elements="Unpublished"	eprints="unpub" />
+		</crosswalks:dictionary>
 
 		<crosswalks:dictionary elements="publication-status">
 			<crosswalks:entry elements="Published"		eprints="pub" />
